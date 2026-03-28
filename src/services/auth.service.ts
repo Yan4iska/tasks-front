@@ -3,11 +3,6 @@ import { apiDebug } from '@/lib/api-debug';
 import { IAuthForm, IAuthResponse } from '@/types/auth.types';
 import { getAccessToken, removeFromStorage, saveTokenStorage } from './auth-token.service';
 
-export enum EnumTokens {
-  'ACCESS_TOKEN' = 'accessToken',
-  'REFRESH_TOKEN' = 'refreshToken',
-}
-
 function assertAuthPayload(data: unknown): asserts data is IAuthResponse {
   if (!data || typeof data !== 'object') {
     throw new Error('Invalid auth response: empty body');
