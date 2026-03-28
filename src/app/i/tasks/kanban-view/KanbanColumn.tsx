@@ -50,7 +50,7 @@ function KanbanColumnComponent({ value, items, label, setItems }: IKanbanColumn)
             {value !== 'completed' && !items?.some((item) => item.id === '') && (
               <KanbanAddCardInput
                 setItems={setItems}
-                filterDate={value === 'completed' ? undefined : FILTERS[value].format()}
+                filterDate={FILTERS[value].format()}
               />
             )}
           </div>

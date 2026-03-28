@@ -51,7 +51,7 @@ function ListRowParentComponent({ value, items, label, setItems }: IListRowParen
           {value !== 'completed' && !items?.some((item) => item.id === '') && (
             <ListAddRowInput
               setItems={setItems}
-              filterDate={value === 'completed' ? undefined : FILTERS[value].format()}
+              filterDate={FILTERS[value].format()}
             />
           )}
         </div>

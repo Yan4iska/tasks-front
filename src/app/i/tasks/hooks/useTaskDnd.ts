@@ -22,14 +22,13 @@ export function useTaskDnd() {
       return;
     }
 
-    // Проверка существования ключа в FILTERS
-    if (destinationColumnId !== 'completed' && !FILTERS[destinationColumnId]) {
+    // После ветки 'completed' тип уже без 'completed' — проверяем только FILTERS (невалидный droppableId с рантайма).
+    if (!FILTERS[destinationColumnId]) {
       console.error('Invalid destination:', destinationColumnId);
       return;
     }
 
-    // Получение даты из FILTERS и преобразование в строку
-    const newCreatedAt = FILTERS[destinationColumnId as Exclude<TaskColumnId, 'completed'>].toISOString();
+    const newCreatedAt = FILTERS[destinationColumnId].toISOString();
 
     updateTask({
       id: res.draggableId,
