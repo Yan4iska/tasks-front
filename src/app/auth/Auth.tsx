@@ -1,4 +1,5 @@
 'use client';
+import { errorCatch } from '@/api/error';
 import { DASHBOARD_PAGES } from '@/config/pages-url.config';
 import { authService } from '@/services/auth.service';
 import { IAuthForm } from '@/types/auth.types';
@@ -25,16 +26,13 @@ export const Auth = () => {
     mutationFn: (data: IAuthForm) =>
       authService.main(authModeRef.current === 'login' ? 'login' : 'register', data),
     onSuccess() {
-      toast.success('Successfully login!');
+      const mode = authModeRef.current;
+      toast.success(mode === 'register' ? 'Account created!' : 'Signed in successfully.');
       reset();
       push(DASHBOARD_PAGES.HOME);
     },
     onError(err: unknown) {
-      const msg =
-        err && typeof err === 'object' && 'response' in err
-          ? String((err as { response?: { data?: { message?: unknown } } }).response?.data?.message ?? '')
-          : '';
-      toast.error(msg || 'Auth failed. Check email/password or try again.');
+      toast.error(errorCatch(err) || 'Auth failed. Check email/password or try again.');
     },
   });
 

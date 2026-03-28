@@ -8,7 +8,11 @@ jest.mock('@/api/interceptors', () => ({
   },
 }));
 
-jest.mock('@/services/auth-token.service');
+jest.mock('@/services/auth-token.service', () => ({
+  saveTokenStorage: jest.fn(),
+  removeFromStorage: jest.fn(),
+  getAccessToken: jest.fn(() => 'test-token'),
+}));
 
 describe('authService', () => {
   const mockResponse = {
@@ -17,6 +21,10 @@ describe('authService', () => {
       user: { id: 1, email: 'test@example.com' },
     },
   };
+
+  beforeEach(() => {
+    (axiosClassic.post as jest.Mock).mockReset();
+  });
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -44,6 +52,16 @@ describe('authService', () => {
       password: '1234',
     });
     expect(tokenService.saveTokenStorage).toHaveBeenCalledWith('test-token');
+  });
+
+  it('should reject when accessToken is missing (no false success)', async () => {
+    (axiosClassic.post as jest.Mock).mockResolvedValueOnce({ data: { user: {} } });
+
+    await expect(
+      authService.main('login', { email: 'test@example.com', password: '1234' }),
+    ).rejects.toThrow(/missing accessToken/);
+
+    expect(tokenService.saveTokenStorage).not.toHaveBeenCalled();
   });
 
   it('should call /auth/login/access-token and save token', async () => {

@@ -1,22 +1,50 @@
 import { axiosClassic } from '@/api/interceptors';
+import { apiDebug } from '@/lib/api-debug';
 import { IAuthForm, IAuthResponse } from '@/types/auth.types';
-import { removeFromStorage, saveTokenStorage } from './auth-token.service';
+import { getAccessToken, removeFromStorage, saveTokenStorage } from './auth-token.service';
 
 export enum EnumTokens {
   'ACCESS_TOKEN' = 'accessToken',
   'REFRESH_TOKEN' = 'refreshToken',
 }
 
-export const authService = {
-  async main(type: 'login' | 'register', data: IAuthForm) {
-    const res = await axiosClassic.post<IAuthResponse>(`/auth/${type}`, data);
+function assertAuthPayload(data: unknown): asserts data is IAuthResponse {
+  if (!data || typeof data !== 'object') {
+    throw new Error('Invalid auth response: empty body');
+  }
+  const token = (data as IAuthResponse).accessToken;
+  if (!token || typeof token !== 'string') {
+    throw new Error('Invalid auth response: missing accessToken');
+  }
+}
 
-    if (res.data.accessToken) saveTokenStorage(res.data.accessToken);
+export const authService = {
+  async main(type: 'login' | 'register', data: IAuthForm): Promise<IAuthResponse> {
+    const url = `/auth/${type}`;
+    apiDebug('POST', { url, baseURL: axiosClassic.defaults?.baseURL, type });
+
+    const res = await axiosClassic.post<IAuthResponse>(url, data);
+    apiDebug('POST ok', { status: res.status, hasUser: Boolean(res.data?.user) });
+
+    assertAuthPayload(res.data);
+    saveTokenStorage(res.data.accessToken);
+
+    if (typeof window !== 'undefined' && !getAccessToken()) {
+      throw new Error(
+        'Access token was not stored (cookies blocked or misconfigured). Allow cookies for this site.',
+      );
+    }
+
+    return res.data;
   },
 
   async getNewTokens() {
     const res = await axiosClassic.post<IAuthResponse>('/auth/login/access-token');
-    if (res.data.accessToken) saveTokenStorage(res.data.accessToken);
+    assertAuthPayload(res.data);
+    saveTokenStorage(res.data.accessToken);
+    if (typeof window !== 'undefined' && !getAccessToken()) {
+      throw new Error('Access token was not stored after refresh.');
+    }
     return res;
   },
 
