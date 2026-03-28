@@ -4,7 +4,7 @@ import { authService } from '@/services/auth.service';
 import { IAuthForm } from '@/types/auth.types';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import styles from './Auth.module.scss';
@@ -16,12 +16,14 @@ export const Auth = () => {
     mode: 'onChange',
   });
 
-  const [isLoginForm, setIsLoginForm] = useState(false);
+  /** Синхронно до submit: setState в onClick отстаёт, из‑за этого раньше уходил не тот endpoint. */
+  const authModeRef = useRef<'login' | 'register'>('register');
   const { push } = useRouter();
 
   const { mutate } = useMutation({
     mutationKey: ['auth'],
-    mutationFn: (data: IAuthForm) => authService.main(isLoginForm ? 'login' : 'register', data),
+    mutationFn: (data: IAuthForm) =>
+      authService.main(authModeRef.current === 'login' ? 'login' : 'register', data),
     onSuccess() {
       toast.success('Successfully login!');
       reset();
@@ -65,16 +67,13 @@ export const Auth = () => {
           })}
         />
         <div className={styles.buttons}>
-          <Button type="button" onClick={() => setIsLoginForm(true)}>
+          <Button type="submit" onClick={() => { authModeRef.current = 'login'; }}>
             Login
           </Button>
-          <Button type="button" onClick={() => setIsLoginForm(false)}>
+          <Button type="submit" onClick={() => { authModeRef.current = 'register'; }}>
             Register
           </Button>
         </div>
-        <Button type="submit" className={styles.submit}>
-          {isLoginForm ? 'Sign in' : 'Create account'}
-        </Button>
       </form>
     </div>
   );
