@@ -66,23 +66,3 @@ jobs:
 
       - name: Lint code
         run: npm run lint
-
-  deploy-frontend-image:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Log in to Yandex Cloud Container Registry
-        uses: yc-actions/yc-cr-login@v1 # Использование готового действия для авторизации:cite[2]
-        with:
-          yc-sa-credentials: ${{ secrets.YC_CREDENTIALS }} # Передаем учетные данные
-
-      - name: Build and tag Docker image
-        run: |
-          COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
-          docker build -t ${{ secrets.YC_REGISTRY }}/my-frontend-app:$COMMIT_SHA -f path/to/Dockerfile .        
-
-      - name: Push Docker image
-        run: docker push ${{ secrets.YC_REGISTRY }}/my-frontend-app:$COMMIT_SHA
