@@ -1,0 +1,10 @@
+.input {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+}

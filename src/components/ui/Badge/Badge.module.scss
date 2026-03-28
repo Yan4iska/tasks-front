@@ -1,0 +1,29 @@
+// Variables
+$gray-bg: rgba(107, 114, 128, 0.2); // bg-gray-500/20
+$red-bg: rgba(248, 113, 113, 0.6); // bg-red-400/60
+$orange-bg: rgba(251, 146, 60, 0.7); // bg-orange-400/70
+$blue-bg: rgba(96, 165, 250, 0.7); // bg-blue-400/70
+$white-text: #ffffff;
+
+// Base styles
+.badge {
+  @apply rounded-lg w-max py-1 px-2 text-xs font-semibold transition; // Tailwind classes for base styling
+  color: $white-text;
+}
+
+// Variants
+.badge-gray {
+  background-color: $gray-bg;
+}
+
+.badge-high {
+  background-color: $red-bg;
+}
+
+.badge-medium {
+  background-color: $orange-bg;
+}
+
+.badge-low {
+  background-color: $blue-bg;
+}

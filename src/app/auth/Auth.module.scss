@@ -1,0 +1,28 @@
+@use '/src/styles/variables.scss' as vars;
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.form {
+  width: 25%;
+  margin: auto;
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
+  background-color: vars.$sidebar;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.Field {
+  margin-bottom: 1rem;
+}

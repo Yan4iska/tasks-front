@@ -1,0 +1,21 @@
+// Создаем анимацию вращения
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Стили для контейнера
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Стили для иконки с анимацией
+.loader-icon {
+  height: 1.25rem; // 20px
+  width: 1.25rem; // 20px
+  color: #ffffff; // Цвет белый
+  animation: spin 1s linear infinite;
+}

@@ -1,0 +1,48 @@
+.container {
+  position: relative;
+  width: 20rem;
+  text-align: center;
+}
+
+.timer {
+  font-size: 4.5rem;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.controlButton {
+  margin-top: 1.5rem;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.resetButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+}
+
+.createButton {
+  margin-top: 0.25rem;
+}

@@ -1,0 +1,17 @@
+// Variables
+$border-color: #d1d5db; // Цвет для разделительной линии
+
+// Styles
+.heading {
+  h1 {
+    font-size: 1.875rem; // text-3xl
+    font-weight: 500; // font-medium
+  }
+
+  .divider {
+    margin: 0.75rem 0; // my-3
+    height: 0.125rem; // h-0.5
+    background-color: $border-color;
+    width: 100%;
+  }
+}

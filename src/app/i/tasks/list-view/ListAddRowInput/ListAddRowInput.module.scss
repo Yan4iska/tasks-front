@@ -1,0 +1,22 @@
+.addRow {
+  button {
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-2);
+    padding: 0.4rem 0.55rem;
+    font-size: 0.86rem;
+    line-height: 1.25rem;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--text-1);
+      border-color: rgba(117, 81, 255, 0.55);
+      background-color: rgba(117, 81, 255, 0.08);
+    }
+  }
+}

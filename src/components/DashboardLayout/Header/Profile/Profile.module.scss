@@ -1,0 +1,41 @@
+.profileContainer {
+  position: absolute;
+  top: 1.5rem; /* top-big-layout */
+  right: 2rem; /* right-big-layout */
+}
+
+.profileContent {
+  display: flex;
+  align-items: center; /* flex items-center */
+}
+
+.textContainer {
+  text-align: right; /* text-right */
+  margin-right: 0.75rem; /* mr-3 */
+
+  p {
+    font-weight: bold; /* font-bold */
+
+    &:first-of-type {
+      margin-bottom: 0.25rem; /* -mb-1 */
+    }
+
+    &:last-of-type {
+      font-size: 0.875rem; /* text-sm */
+      opacity: 0.4; /* opacity-40 */
+    }
+  }
+}
+
+.avatar {
+  width: 2.5rem; /* w-10 */
+  height: 2.5rem; /* h-10 */
+  display: flex;
+  justify-content: center; /* flex justify-center */
+  align-items: center; /* items-center */
+  font-size: 1.5rem; /* text-2xl */
+  color: white; /* text-white */
+  background-color: rgba(255, 255, 255, 0.2); /* bg-white/20 */
+  border-radius: 15%; /* rounded */
+  text-transform: uppercase; /* uppercase */
+}

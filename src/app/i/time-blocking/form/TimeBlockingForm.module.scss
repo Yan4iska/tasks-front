@@ -1,0 +1,44 @@
+.form {
+  width: min(100%, 42rem);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: var(--space-4);
+  }
+}
+
+.field {
+  margin-bottom: var(--space-4);
+}
+
+.colorLabel {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--text-2);
+  margin-left: var(--space-1);
+}
+
+.submitButton {
+  margin-top: var(--space-6);
+  min-width: 8rem;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.selectWrapper {
+  position: relative;
+  z-index: 20;
+}
+
+.colorSelect {
+  max-width: 16rem;
+}

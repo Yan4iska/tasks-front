@@ -1,0 +1,14 @@
+.logoutButton {
+  position: absolute;
+  top: 0.25rem; /* top-1 */
+  right: 0.25rem; /* right-1 */
+
+  button {
+    opacity: 0.2; /* opacity-20 */
+    transition: opacity 0.3s; /* transition-opacity duration-300 */
+
+    &:hover {
+      opacity: 1; /* hover:opacity-100 */
+    }
+  }
+}

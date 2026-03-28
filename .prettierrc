@@ -1,0 +1,41 @@
+{
+    "printWidth": 100,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always",
+    "tabWidth": 2,
+    "overrides": [
+        {
+            "files": ["**/*.{scss,css}"],
+            "options": {
+                "order": "concentric-css"
+            }
+        }
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true,
+    "importOrderGroupNamespaceSpecifiers": true,
+    "importOrderCaseInsensitive": true,
+    "importOrder": [
+        "<THIRD_PARTY_MODULES>",
+        "^react$",
+        "effector",
+        "(monocle-ts|fp-ts)",
+        "^@domains/(.*)$",
+        "^@stores/(.*)$",
+        "^@api/(.*)$",
+        "^@utils/(.*)$",
+        "^@hooks/(.*)$",
+        "^@providers/(.*)$",
+        "^@views/(.*)$",
+        "^@layouts/(.*)$",
+        "^@pages/(.*)$",
+        "^@components/(.*)$",
+        "^\\.\\/.+(?<!s?css)$",
+        "^@styles/(.*)$",
+        "^\\./.+\\.s?css$",
+        "^@assets/(.*)$",
+        "^[./]",
+        "^@mock/(.*)$"
+    ]
+}

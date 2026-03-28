@@ -1,0 +1,101 @@
+// Variables
+$white: #ffffff;
+$white60: rgba(255, 255, 255, 0.6);
+$white30: rgba(255, 255, 255, 0.3);
+$white15: rgba(255, 255, 255, 0.15);
+$gray100: #f5f5f5;
+$border-color: #d1d5db;
+$primary: #3b82f6;
+$red-500: #ef4444;
+$red-400: #f87171;
+$green-500: #10b981;
+$green-400: #34d399;
+
+// Styles
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.875rem; // text-sm
+  color: $white60;
+  margin-left: 0.375rem; // ml-1.5
+  font-weight: 500;
+}
+
+.input {
+  margin-top: 0.5rem; // mt-2
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem; // rounded-lg
+  border: 1px solid $border-color;
+  background-color: transparent; // bg-white/0
+  padding: 0.75rem; // p-3
+  font-size: 1rem; // text-base
+  outline: none;
+  transition:
+    border-color 0.5s,
+    background-color 0.5s,
+    color 0.5s; // duration-500 transition-colors
+
+  &::placeholder {
+    color: $white30;
+    font-weight: 400; // font-normal
+  }
+
+  &:focus {
+    border-color: $primary; // focus:border-primary
+  }
+
+  &.disabled {
+    border: none;
+    background-color: $gray100;
+
+    &.dark {
+      background-color: rgba($white, 0.05); // dark:bg-white/5
+
+      &::placeholder {
+        color: $white15; // dark:placeholder:!text-[rgba(255,255,255,0.15)]
+      }
+    }
+  }
+
+  &.error {
+    border-color: $red-500;
+    color: $red-500;
+
+    &::placeholder {
+      color: $red-500;
+    }
+
+    &.dark {
+      border-color: $red-400;
+      color: $red-400;
+
+      &::placeholder {
+        color: $red-400;
+      }
+    }
+  }
+
+  &.success {
+    border-color: $green-500;
+    color: $green-500;
+
+    &::placeholder {
+      color: $green-500;
+    }
+
+    &.dark {
+      border-color: $green-400;
+      color: $green-400;
+
+      &::placeholder {
+        color: $green-400;
+      }
+    }
+  }
+}

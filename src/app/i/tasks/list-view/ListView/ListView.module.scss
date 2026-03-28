@@ -1,0 +1,92 @@
+.table {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--panel);
+
+  .header {
+    display: grid;
+    grid-template-columns: 1.4fr 0.4fr 0.4fr 0.1fr;
+    color: var(--text-2);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .header,
+  .parentsWrapper .row,
+  .parentsWrapper .colHeading {
+    border-top: 1px solid var(--border);
+    text-align: left;
+    white-space: nowrap;
+
+    > div {
+      border-right: 1px solid var(--border);
+      padding: 0.65rem 0.9rem;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+
+  .parentsWrapper {
+    .colHeading {
+      background-color: rgba(255, 255, 255, 0.015);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.025);
+      }
+
+      > div {
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--text-1);
+        padding: 0.8rem 0.9rem;
+      }
+    }
+
+    .addRow {
+      padding: 0.55rem 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .row {
+      font-weight: 400;
+      display: grid;
+      grid-template-columns: 1.4fr 0.4fr 0.4fr 0.1fr;
+      position: relative;
+      background-color: transparent;
+      transition: background-color 0.16s ease;
+
+      &.completed {
+        > div > span > input {
+          font-style: italic;
+          text-decoration: line-through;
+          opacity: 0.5;
+        }
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.045);
+      }
+
+      > div > span {
+        .grip {
+          opacity: 0.2;
+          transition: opacity 0.3s ease;
+          margin-left: -0.75rem;
+          margin-right: -0.25rem;
+
+          &:hover,
+          &:active {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.prioritySelect {
+  min-width: 9.5rem;
+}

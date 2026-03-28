@@ -1,0 +1,23 @@
+.dashboardLayout {
+  display: grid;
+  min-height: 100vh;
+
+  // Сетка для экранов 2XL
+  @media (min-width: 1536px) {
+    grid-template-columns: 1.1fr 6fr;
+  }
+
+  // Сетка для других экранов
+  grid-template-columns: 1.2fr 6fr;
+}
+
+.sidebar {
+  // Оставляем под Sidebar (если есть дополнительные стили, добавляем сюда)
+}
+
+.main {
+  padding: 2rem; // соответствует p-big-layout
+  overflow-x: hidden;
+  max-height: 100vh;
+  position: relative;
+}
