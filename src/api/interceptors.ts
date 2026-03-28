@@ -1,9 +1,11 @@
+import { API_BASE_URL } from '@/constants/api.constants';
 import { getAccessToken, removeFromStorage } from '@/services/auth-token.service';
 import axios, { type CreateAxiosDefaults } from 'axios';
 import { errorCatch } from '@/api/error';
 import { authService } from '@/services/auth.service';
+
 const options: CreateAxiosDefaults = {
-  baseURL: 'http://localhost:4200/api',
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
