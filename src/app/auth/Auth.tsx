@@ -27,6 +27,13 @@ export const Auth = () => {
       reset();
       push(DASHBOARD_PAGES.HOME);
     },
+    onError(err: unknown) {
+      const msg =
+        err && typeof err === 'object' && 'response' in err
+          ? String((err as { response?: { data?: { message?: unknown } } }).response?.data?.message ?? '')
+          : '';
+      toast.error(msg || 'Auth failed. Check email/password or try again.');
+    },
   });
 
   const onSubmit: SubmitHandler<IAuthForm> = (data) => {
@@ -58,9 +65,16 @@ export const Auth = () => {
           })}
         />
         <div className={styles.buttons}>
-          <Button onClick={() => setIsLoginForm(true)}>Login</Button>
-          <Button onClick={() => setIsLoginForm(false)}>Register</Button>
+          <Button type="button" onClick={() => setIsLoginForm(true)}>
+            Login
+          </Button>
+          <Button type="button" onClick={() => setIsLoginForm(false)}>
+            Register
+          </Button>
         </div>
+        <Button type="submit" className={styles.submit}>
+          {isLoginForm ? 'Sign in' : 'Create account'}
+        </Button>
       </form>
     </div>
   );
