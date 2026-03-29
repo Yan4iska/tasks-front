@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { GanttChartSquare } from 'lucide-react';
 import Link from 'next/link';
 
@@ -11,20 +12,23 @@ import { MENU } from './Menu.data';
 
 import styles from './Sidebar.module.scss';
 
-export function Sidebar() {
+type SidebarProps = {
+  isOpen?: boolean;
+  onNavigate?: () => void;
+};
+
+export function Sidebar({ isOpen = false, onNavigate }: SidebarProps) {
   return (
-    <aside className={styles.sidebar}>
-      <div>
-        <Link href="/boards" className={styles.header}>
-          <GanttChartSquare color={COLORS.primary} size={38} />
-          <span className={styles.title}>
-            TRELLO 2{/* <span className={styles.beta}>beta</span> */}
-          </span>
+    <aside className={clsx(styles.sidebar, isOpen && styles.open)}>
+      <div className={styles.inner}>
+        <Link href="/boards" className={styles.header} onClick={onNavigate}>
+          <GanttChartSquare color={COLORS.primary} className={styles.logo} aria-hidden />
+          <span className={styles.title}>TRELLO 2</span>
         </Link>
         <div className={styles.menu}>
           <LogoutButton />
           {MENU.map((item) => (
-            <MenuItem item={item} key={item.link} />
+            <MenuItem item={item} key={item.link} onNavigate={onNavigate} />
           ))}
         </div>
       </div>

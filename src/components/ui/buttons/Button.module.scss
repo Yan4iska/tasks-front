@@ -1,3 +1,5 @@
+@use '@/styles/abstracts/variables' as v;
+
 .button {
   border: 1px solid var(--border);
   background:
@@ -5,6 +7,7 @@
     rgba(255, 255, 255, 0.02);
   color: var(--text-1);
   border-radius: 12px;
+  min-height: v.$touch-target-min;
   padding: 0.55rem 1rem;
   font-weight: 600;
   letter-spacing: 0.01em;

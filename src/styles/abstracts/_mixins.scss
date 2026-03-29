@@ -1,0 +1,81 @@
+@use 'variables' as v;
+
+/// Up to 767.98px — phone layouts, drawer nav, stacked sections.
+@mixin mobile {
+  @media (max-width: (v.$bp-md - 0.02px)) {
+    @content;
+  }
+}
+
+/// 768px – 1023.98px — tablet; optional overrides between phone and desktop.
+@mixin tablet {
+  @media (min-width: v.$bp-md) and (max-width: (v.$bp-lg - 0.02px)) {
+    @content;
+  }
+}
+
+/// 1024px+ — laptop / small desktop (persistent sidebar breakpoint in this app).
+@mixin desktop {
+  @media (min-width: v.$bp-lg) {
+    @content;
+  }
+}
+
+/// 1400px+ — large desktop, max content width helpers.
+@mixin desktop-lg {
+  @media (min-width: v.$bp-xl) {
+    @content;
+  }
+}
+
+// --- Mobile-first aliases (avoid duplicating min-width media queries) ---
+
+@mixin from-tablet {
+  @media (min-width: v.$bp-md) {
+    @content;
+  }
+}
+
+@mixin from-desktop {
+  @media (min-width: v.$bp-lg) {
+    @content;
+  }
+}
+
+@mixin from-desktop-lg {
+  @media (min-width: v.$bp-xl) {
+    @content;
+  }
+}
+
+/// Below desktop breakpoint — drawer nav + scrim (phone + tablet).
+@mixin until-desktop {
+  @media (max-width: (v.$bp-lg - 0.02px)) {
+    @content;
+  }
+}
+
+/// Fluid horizontal page padding aligned with dashboard main.
+@mixin page-padding-x {
+  padding-left: v.$space-page-mobile;
+  padding-right: v.$space-page-mobile;
+
+  @include from-tablet {
+    padding-left: v.$space-page-tablet;
+    padding-right: v.$space-page-tablet;
+  }
+
+  @include from-desktop {
+    padding-left: v.$space-page-desktop;
+    padding-right: v.$space-page-desktop;
+  }
+}
+
+@mixin hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

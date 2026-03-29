@@ -1,23 +1,78 @@
-.dashboardLayout {
-  display: grid;
-  min-height: 100vh;
+@use '@/styles/abstracts/mixins' as *;
+@use '@/styles/abstracts/variables' as v;
 
-  // Сетка для экранов 2XL
-  @media (min-width: 1536px) {
-    grid-template-columns: 1.1fr 6fr;
+.dashboardLayout {
+  display: block;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+
+  @include from-desktop {
+    display: grid;
+    grid-template-columns: minmax(v.$sidebar-width-min, 1.15fr) minmax(0, 6fr);
   }
 
-  // Сетка для других экранов
-  grid-template-columns: 1.2fr 6fr;
+  @include desktop-lg {
+    grid-template-columns: minmax(v.$sidebar-width-min, v.$sidebar-width-max) minmax(0, 1fr);
+  }
 }
 
-.sidebar {
-  // Оставляем под Sidebar (если есть дополнительные стили, добавляем сюда)
+.scrim {
+  display: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+
+  @include until-desktop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: v.$z-overlay;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+
+    &[data-open='true'] {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
 }
 
 .main {
-  padding: 2rem; // соответствует p-big-layout
-  overflow-x: hidden;
-  max-height: 100vh;
   position: relative;
+  min-width: 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+
+  @include from-desktop {
+    min-height: 0;
+    max-height: 100dvh;
+  }
+}
+
+.mainInner {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  @include page-padding-x;
+  padding-top: v.$space-page-mobile;
+  padding-bottom: v.$space-page-mobile;
+
+  @include from-tablet {
+    padding-top: v.$space-page-tablet;
+    padding-bottom: v.$space-page-tablet;
+  }
+
+  @include from-desktop {
+    padding-top: v.$space-page-desktop;
+    padding-bottom: v.$space-page-desktop;
+  }
 }

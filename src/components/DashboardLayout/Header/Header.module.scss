@@ -1,0 +1,59 @@
+@use '@/styles/abstracts/mixins' as *;
+@use '@/styles/abstracts/variables' as v;
+
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--space-3);
+  flex-shrink: 0;
+  padding-bottom: var(--space-4);
+  position: relative;
+  min-height: v.$touch-target-min;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: v.$touch-target-min;
+  min-height: v.$touch-target-min;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  color: var(--text-1);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    background: var(--panel-2);
+    border-color: rgba(117, 81, 255, 0.35);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+  }
+
+  @include from-desktop {
+    display: none;
+  }
+}
+
+.menuIcon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.headerRight {
+  justify-self: end;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}

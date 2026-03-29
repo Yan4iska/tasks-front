@@ -1,8 +1,1 @@
-// colors
-$primary: #7551ff;
-$primary-2: #23d3ee;
-$secondary: #f97912;
-$border: rgba(255, 255, 255, 0.12);
-$sidebar: #141515;
-$bg: #0e0f0f;
-$danger: #ff4d4f;
+@forward './abstracts/variables';

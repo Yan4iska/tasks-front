@@ -1,0 +1,42 @@
+// -----------------------------------------------------------------------------
+// Breakpoints (design reference: 375 → 1400+)
+// Use with mixins in _mixins.scss; mobile-first helpers preferred for new code.
+// -----------------------------------------------------------------------------
+$bp-xs: 375px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1400px;
+
+// -----------------------------------------------------------------------------
+// Layout & spacing (SCSS-side; mirrors CSS vars in global.scss where useful)
+// -----------------------------------------------------------------------------
+$space-page-mobile: 1rem;
+$space-page-tablet: 1.25rem;
+$space-page-desktop: 2rem;
+
+$sidebar-width-min: 220px;
+$sidebar-width-max: 280px;
+$sidebar-drawer-width: min(18rem, 88vw);
+
+// -----------------------------------------------------------------------------
+// z-index scale (stacking: overlay < sidebar < modals later)
+// -----------------------------------------------------------------------------
+$z-header: 40;
+$z-overlay: 100;
+$z-sidebar-drawer: 110;
+
+// -----------------------------------------------------------------------------
+// Colors (legacy SCSS; global tokens live in :root)
+// -----------------------------------------------------------------------------
+$primary: #7551ff;
+$primary-2: #23d3ee;
+$secondary: #f97912;
+$border: rgba(255, 255, 255, 0.12);
+$sidebar: #141515;
+$bg: #0e0f0f;
+$danger: #ff4d4f;
+
+// -----------------------------------------------------------------------------
+// Touch / a11y
+// -----------------------------------------------------------------------------
+$touch-target-min: 44px;

@@ -1,3 +1,4 @@
+@use './abstracts/mixins' as mix;
 @use './variables.scss' as vars;
 
 /*
@@ -5,6 +6,12 @@
   Why: keeps UI consistent (spacing/colors) and makes modules smaller/cleaner.
 */
 :root {
+  /* breakpoints (for JS / debugging; SCSS uses abstracts/_variables) */
+  --bp-xs: #{vars.$bp-xs};
+  --bp-md: #{vars.$bp-md};
+  --bp-lg: #{vars.$bp-lg};
+  --bp-xl: #{vars.$bp-xl};
+
   /* spacing */
   --layout: 1rem;
   --space-1: 0.25rem;
@@ -38,6 +45,18 @@
   --shadow-sm: 0 1px 0 rgba(255, 255, 255, 0.06), 0 10px 30px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 60px rgba(0, 0, 0, 0.45);
   --ring: 0 0 0 4px rgba(117, 81, 255, 0.22);
+
+  /* layout */
+  --touch-target-min: #{vars.$touch-target-min};
+  --page-pad-x: #{vars.$space-page-mobile};
+
+  @include mix.from-tablet {
+    --page-pad-x: #{vars.$space-page-tablet};
+  }
+
+  @include mix.from-desktop {
+    --page-pad-x: #{vars.$space-page-desktop};
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -63,9 +82,12 @@ body {
     radial-gradient(900px 500px at 20% 0%, rgba(117, 81, 255, 0.25), transparent 55%),
     radial-gradient(700px 420px at 80% 20%, rgba(35, 211, 238, 0.16), transparent 60%),
     var(--bg);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100dvh;
+  font-size: 15px;
 
-  @media (max-width: 1200px) {
+  @include mix.from-tablet {
     font-size: 16px;
   }
 }

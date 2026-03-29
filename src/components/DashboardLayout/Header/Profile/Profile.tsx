@@ -7,7 +7,6 @@ import styles from './Profile.module.scss';
 
 export function Profile() {
   const { data, isLoading } = useProfile();
-  console.log(data?.user);
   const anonimus = 'ANONIMUS[LOL]';
   return (
     <div className={styles.profileContainer}>

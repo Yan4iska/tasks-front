@@ -1,31 +1,71 @@
+@use '@/styles/abstracts/mixins' as *;
+@use '@/styles/abstracts/variables' as v;
+
 .board {
   display: grid;
   grid-auto-flow: column;
-  gap: 1rem;
+  grid-auto-columns: minmax(14.5rem, 1fr);
+  gap: var(--space-3);
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
-  padding-bottom: 0.4rem;
+  overflow-y: hidden;
+  padding-bottom: var(--space-2);
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  @include hide-scrollbar;
+
+  @include from-tablet {
+    grid-auto-columns: minmax(16rem, 1fr);
+    gap: var(--space-4);
+  }
+
+  @include from-desktop {
+    grid-auto-columns: minmax(17rem, 18rem);
+  }
+
+  @include desktop-lg {
+    grid-auto-columns: 18rem;
+  }
 
   .column {
-    width: 18rem;
-    white-space: nowrap;
-    min-height: 79vh;
+    scroll-snap-align: start;
+    min-height: 55vh;
+    max-height: min(79vh, 720px);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background: var(--panel);
-    padding: 0.65rem;
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+
+    @include from-tablet {
+      min-height: 65vh;
+      max-height: min(79vh, 800px);
+    }
+
+    @include from-desktop {
+      min-height: 79vh;
+    }
 
     .columnHeading {
       font-weight: 600;
+      font-size: 0.9375rem;
       color: var(--text-1);
-      padding: 0.35rem 0.45rem 0.25rem;
+      padding: var(--space-2) var(--space-2) var(--space-1);
+      flex-shrink: 0;
+
+      @include from-desktop {
+        font-size: 1rem;
+      }
     }
 
     .card {
       border-radius: var(--radius-md);
       border: 1px solid var(--border);
-      margin-top: 0.625rem;
-      padding: 0.8rem;
+      margin-top: var(--space-2);
+      padding: var(--space-3);
       position: relative;
       background-color: rgba(255, 255, 255, 0.02);
       transition:
@@ -47,24 +87,35 @@
       .cardHeader {
         display: flex;
         align-items: center;
-        margin-bottom: 0.5rem;
-        font-size: 93%;
+        margin-bottom: var(--space-2);
+        font-size: 0.875rem;
+        flex-wrap: wrap;
+        gap: var(--space-1);
+
+        @include from-desktop {
+          font-size: 0.93rem;
+        }
 
         > input:last-child {
-          margin-left: 0.5rem;
+          margin-left: var(--space-2);
         }
       }
 
       .cardBody,
       .cardBody > div > button > span,
       .cardBody > div > div > button > span {
-        font-size: 83%;
+        font-size: 0.8125rem;
+
+        @include from-desktop {
+          font-size: 0.83rem;
+        }
       }
 
       .cardBody {
         > div {
-          margin-bottom: 0.5rem;
+          margin-bottom: var(--space-2);
           width: max-content;
+          max-width: 100%;
           min-width: 6rem;
 
           > button:last-child {
@@ -74,13 +125,21 @@
       }
 
       .prioritySelect {
-        min-width: 8.5rem;
+        min-width: 0;
+        width: 100%;
+        max-width: 10rem;
+
+        @include from-desktop {
+          min-width: 8.5rem;
+          width: auto;
+          max-width: none;
+        }
       }
 
       .cardActions {
         position: absolute;
-        bottom: 0.25rem;
-        right: 0.375rem;
+        bottom: var(--space-1);
+        right: var(--space-2);
         opacity: 0.4;
       }
     }
@@ -93,8 +152,10 @@
   margin-left: -0.25rem;
   margin-right: -0.125rem;
   position: absolute;
-  top: 0.5rem;
-  right: 0.375rem;
+  top: var(--space-2);
+  right: var(--space-2);
+  min-width: v.$touch-target-min;
+  min-height: v.$touch-target-min;
 
   &:hover,
   &:active {

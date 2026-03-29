@@ -1,17 +1,31 @@
-// Variables
-$border-color: #d1d5db; // Цвет для разделительной линии
+@use '@/styles/abstracts/mixins' as *;
 
-// Styles
 .heading {
+  margin-bottom: var(--space-2);
+
   h1 {
-    font-size: 1.875rem; // text-3xl
-    font-weight: 500; // font-medium
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+
+    @include from-tablet {
+      font-size: 1.625rem;
+    }
+
+    @include from-desktop {
+      font-size: 1.875rem;
+      font-weight: 500;
+    }
   }
 
   .divider {
-    margin: 0.75rem 0; // my-3
-    height: 0.125rem; // h-0.5
-    background-color: $border-color;
+    margin: var(--space-3) 0;
+    height: 2px;
+    border-radius: 1px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-2));
     width: 100%;
+    max-width: 12rem;
+    opacity: 0.85;
   }
 }

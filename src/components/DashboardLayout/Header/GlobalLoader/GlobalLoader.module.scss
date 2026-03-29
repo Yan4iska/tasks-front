@@ -1,6 +1,12 @@
+@use '@/styles/abstracts/mixins' as *;
+
 .root {
-  position: fixed;
-  top: 2.3rem;
-  right: 2.3rem;
+  position: relative;
   z-index: 50;
+
+  @include from-desktop {
+    position: fixed;
+    top: 2rem;
+    right: var(--page-pad-x, 2rem);
+  }
 }
